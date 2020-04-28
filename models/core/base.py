@@ -3,5 +3,5 @@ class BlockBase:
         self.name = name
         self.inputs = inputs
 
-    def forward(self, x):
+    def forward(self, x:list):
         raise Exception("Not implemented")

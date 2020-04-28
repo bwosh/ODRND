@@ -9,5 +9,5 @@ num_classes = 3
 arch = get_arch(num_classes)
 
 # Create model
-model = Net.from_arch(arch)
+model = Net(arch)
 print( model.summary() )
