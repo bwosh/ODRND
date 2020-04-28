@@ -11,6 +11,12 @@ The project is developed exclusively by [Błażej Matuszewski](https://github.co
 The project is in very early stage.  
 Some concepts are being implemented.
 
+# Dependencies
+Used versions of libraries during development:  
+- tensorflow : 2.1.0
+- numpy : 1.18.2
+- OpenCV : 4.2.0
+
 # References
 
 The code may be using some concepts described in:

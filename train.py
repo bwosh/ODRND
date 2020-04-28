@@ -11,3 +11,7 @@ arch = get_arch(num_classes)
 # Create model
 model = Net(arch)
 print( model.summary() )
+
+# Test code 
+from debug.checks import test_bbox_hm
+test_bbox_hm()

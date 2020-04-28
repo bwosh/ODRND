@@ -1,4 +1,4 @@
-from tensorflow.keras.layers import Input, Conv2D, BatchNormalization, ReLU, MaxPool2D, Dense, Flatten, Lambda
+from tensorflow.keras.layers import Input, Conv2D, BatchNormalization, ReLU, MaxPool2D, Dense, Flatten, Lambda, Conv2DTranspose
 from tensorflow.keras.backend import concatenate, reshape
 
 from models.core.base import BlockBase
@@ -41,6 +41,32 @@ class FlattenMergeLayers(BlockBase):
             tensors_flattened.append(flattened)
 
         return Lambda(lambda x:concatenate(x), name=f"{self.name}_concat")(tensors_flattened)
+
+class MergeLayers(BlockBase):
+    def __init__(self, name, inputs):
+        super().__init__(name, inputs)
+    
+    def forward(self, x:list):
+        return Lambda(lambda t:concatenate(t), name=f"{self.name}_concat")(x)
+
+
+class UpConvBnRelu(BlockBase):
+    def __init__(self, name, inputs, filters, iterations=1):
+        super().__init__(name, inputs)
+        self.up_convs = []
+        for i in range(iterations):
+            self.up_convs.append(Conv2DTranspose(filters, kernel_size=1, strides=2, padding='same',name=f"{name}_convT_{i}"))
+        self.bn = BatchNormalization( name=f"{name}_bn")
+        self.activation = ReLU( name=f"{name}_relu")
+
+    def forward(self, x:list):
+        x = get_single_element(x)
+        for uc in self.up_convs:
+            x = uc(x)
+        x = self.bn(x)
+        x = self.activation(x)
+        return x
+
 
 class ConvReluMap(BlockBase):
     def __init__(self, name, inputs, num_classes, filters = 2):
