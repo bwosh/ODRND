@@ -20,6 +20,9 @@ class NetArchitecture:
             if node.name != "input" and isinstance(node, InputBlock):
                 raise Exception("Input name is bad.")
 
+            if node.name != "input" and len(node.inputs)==0:
+                raise Exception(f"No inputs defined for: {node.name}")
+
             nodes[node.name] = node
 
         if "input" not in nodes.keys():
@@ -31,7 +34,7 @@ class NetArchitecture:
             for o in self.outputs:
                 if o not in nodes.keys():
                     raise Exception(f"Output node {o} not found")
-        # TODO validate: no input names for non-inputs
+
         return nodes
 
     def get_node_by_name(self, name):

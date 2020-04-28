@@ -4,6 +4,11 @@ This repository implements top level mini-framework to allow fast creation of ob
 
 The project is developed exclusively by [Błażej Matuszewski](https://github.com/bwosh).
 
+# Status
+
+The project is in very early stage.  
+Some concepts are being implemented.
+
 # References
 
 The code may be using some concepts described in:

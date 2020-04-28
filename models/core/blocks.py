@@ -2,6 +2,7 @@ from tensorflow.keras.layers import Input, Conv2D, BatchNormalization, ReLU, Max
 from tensorflow.keras.backend import concatenate, reshape
 
 from models.core.base import BlockBase
+from models.core.utils import *
 
 
 class ConvBnReluMaxPool(BlockBase):
@@ -16,7 +17,7 @@ class ConvBnReluMaxPool(BlockBase):
             self.pool = MaxPool2D(pool_size=max_pool)
 
     def forward(self, x:list):
-        x=x[0] # TODO validate
+        x = get_single_element(x)
         x = self.conv(x)
         x = self.bn(x)
         x = self.activation(x)
@@ -49,7 +50,7 @@ class ConvReluMap(BlockBase):
         self.conv2 = Conv2D(num_classes, 1, strides=(1, 1), padding='same')
 
     def forward(self, x:list):
-        x = x[0] # TODO validate
+        x = get_single_element(x)
         x = self.conv1(x)
         x = self.activation(x)
         x = self.conv2(x)
@@ -73,7 +74,7 @@ class FlatToConv(BlockBase):
         self.shape = shape
 
     def forward(self, x:list):
-        x=x[0] # TODO validate
+        x = get_single_element(x)
         th,tw,channels = self.shape
         x= self.dense(x)
         x = reshape(x, [-1, tw, th, channels] )
