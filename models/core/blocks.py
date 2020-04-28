@@ -1,4 +1,4 @@
-from tensorflow.keras.layers import Input, Conv2D, BatchNormalization, ReLU, MaxPool2D, Dense, Flatten
+from tensorflow.keras.layers import Input, Conv2D, BatchNormalization, ReLU, MaxPool2D, Dense, Flatten, Lambda
 from tensorflow.keras.backend import concatenate, reshape
 
 from models.core.base import BlockBase
@@ -9,12 +9,12 @@ class ConvBnReluMaxPool(BlockBase):
     def __init__(self, name, inputs,filters=8, kernel=3, dilation_rate=1, padding='same', max_pool=None):
         super().__init__(name, inputs)
 
-        self.conv = Conv2D(filters, kernel, strides=(1, 1), padding=padding, dilation_rate = dilation_rate)
-        self.bn = BatchNormalization()
-        self.activation = ReLU()
+        self.conv = Conv2D(filters, kernel, strides=(1, 1), padding=padding, dilation_rate = dilation_rate, name=f"{name}_conv")
+        self.bn = BatchNormalization( name=f"{name}_bn")
+        self.activation = ReLU( name=f"{name}_relu")
         self.pool = None
         if max_pool is not None:
-            self.pool = MaxPool2D(pool_size=max_pool)
+            self.pool = MaxPool2D(pool_size=max_pool, name=f"{name}_pool")
 
     def forward(self, x:list):
         x = get_single_element(x)
@@ -35,19 +35,19 @@ class FlattenMergeLayers(BlockBase):
     
     def forward(self, x:list):
         tensors_flattened = []
-        for tensor in x:
-            flatten = Flatten()
+        for t_idx, tensor in enumerate(x):
+            flatten = Flatten(name=f"{self.name}_flatten_{t_idx}")
             flattened = flatten(tensor)
             tensors_flattened.append(flattened)
 
-        return concatenate(tensors_flattened)
+        return Lambda(lambda x:concatenate(x), name=f"{self.name}_concat")(tensors_flattened)
 
 class ConvReluMap(BlockBase):
     def __init__(self, name, inputs, num_classes, filters = 2):
         super().__init__(name, inputs)
-        self.conv1 = Conv2D(filters, 3, strides=(1, 1), padding='same')
-        self.activation = ReLU()
-        self.conv2 = Conv2D(num_classes, 1, strides=(1, 1), padding='same')
+        self.conv1 = Conv2D(filters, 3, strides=(1, 1), padding='same', name=f"{name}_conv1")
+        self.activation = ReLU( name=f"{name}_relu")
+        self.conv2 = Conv2D(num_classes, 1, strides=(1, 1), padding='same', name=f"{name}_conv2")
 
     def forward(self, x:list):
         x = get_single_element(x)
@@ -70,15 +70,14 @@ class FlatToConv(BlockBase):
     def __init__(self, name, inputs, shape):
         super().__init__(name, inputs)
         size = shape[0]*shape[1]*shape[2]
-        self.dense = Dense(size, activation='relu')
+        self.dense = Dense(size, activation='relu', name=f"{name}_dense")
         self.shape = shape
 
     def forward(self, x:list):
         x = get_single_element(x)
         th,tw,channels = self.shape
         x= self.dense(x)
-        x = reshape(x, [-1, tw, th, channels] )
-        return x
+        return Lambda(lambda t:reshape(t, [-1, tw, th, channels] ), name=f"{self.name}_reshape")(x)
 
 class PreviewShape(BlockBase):
     def __init__(self, name, inputs, exit = False):
@@ -92,4 +91,14 @@ class PreviewShape(BlockBase):
         if self.exit:
             exit(0)
 
+        return x
+
+class FixedVector(BlockBase):
+    def __init__(self, name, inputs, nodes):
+        super().__init__(name, inputs)
+        self.dense = Dense(nodes, activation="relu", name=f"{self.name}_dense")
+
+    def forward(self, x:list):
+        x = get_single_element(x)
+        x = self.dense(x)
         return x
