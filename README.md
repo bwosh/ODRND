@@ -2,6 +2,8 @@
 
 This repository implements top level mini-framework to allow fast creation of object detection neural networks with branches. 
 
+![architecture definition](./assets/arch_def.png)
+
 The project is developed exclusively by [Błażej Matuszewski](https://github.com/bwosh).
 
 # Status
