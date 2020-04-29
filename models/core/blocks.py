@@ -1,4 +1,4 @@
-from tensorflow.keras.layers import Input, Conv2D, BatchNormalization, ReLU, MaxPool2D, Dense, Flatten, Lambda, Conv2DTranspose
+from tensorflow.keras.layers import Input, Conv2D, BatchNormalization, ReLU, MaxPool2D, Dense, Flatten, Lambda, Conv2DTranspose, multiply
 from tensorflow.keras.backend import concatenate, reshape
 
 from models.core.base import BlockBase
@@ -69,17 +69,28 @@ class UpConvBnRelu(BlockBase):
 
 
 class ConvReluMap(BlockBase):
-    def __init__(self, name, inputs, num_classes, filters = 2):
+    def __init__(self, name, inputs, num_classes, filters = 2, map_mask=None, map_mask_shape=None):
         super().__init__(name, inputs)
         self.conv1 = Conv2D(filters, 3, strides=(1, 1), padding='same', name=f"{name}_conv1")
         self.activation = ReLU( name=f"{name}_relu")
         self.conv2 = Conv2D(num_classes, 1, strides=(1, 1), padding='same', name=f"{name}_conv2")
+
+        self.map_mask = map_mask
+        self.map_mask_shape = map_mask_shape 
+        self.additional_input = None
 
     def forward(self, x:list):
         x = get_single_element(x)
         x = self.conv1(x)
         x = self.activation(x)
         x = self.conv2(x)
+
+        if self.map_mask is not None:
+            if self.map_mask_shape is None:
+                raise Exception("No shape given for map mask")
+            mask = Input(shape = self.map_mask_shape, name=self.map_mask)
+            self.additional_input = mask
+            x = Lambda(lambda t:multiply(t), name=f"{self.name}_mult")([x,mask])
 
         return x
 

@@ -4,9 +4,9 @@ from models.simple_fpn import get_arch
 
 # Parameters
 num_classes = 3
+print_model_summary = True
 run_check_flops = False
-run_test_code = True
-print_model_summary = False
+run_test_code = False
 model_path = './assets/model.h5'
 
 # Get network architecture

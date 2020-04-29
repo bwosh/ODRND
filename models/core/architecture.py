@@ -1,6 +1,6 @@
 from tensorflow.keras.models import Model
 
-from models.core.blocks import InputBlock
+from models.core.blocks import InputBlock, ConvReluMap
 
 class NetArchitecture:
     def __init__(self, arch_definition, outputs):
@@ -46,6 +46,7 @@ class NetArchitecture:
         
         resolved_nodes = {"input":input}
         unresolved_nodes = [k for k in self.nodes if k!="input"]
+        additional_inputs_tensors = {}
        
         while(len(unresolved_nodes)>0):
             # Find next node with resolved inputs
@@ -73,11 +74,22 @@ class NetArchitecture:
 
             # Forwarding
             node_output = node_to_process.forward(inputs)
+
+            # Gathering additional inputs
+            if isinstance(node_to_process, ConvReluMap):
+                if node_to_process.map_mask is not None:
+                    additional_inputs_tensors[node_to_process.map_mask] = node_to_process.additional_input
+
+            # Settling the states
             unresolved_nodes.remove(node_to_process.name)
             resolved_nodes[node_to_process.name] = node_output
 
         # create model
-        intput = self.get_node_by_name("input").input
+        additional_inputs = list(additional_inputs_tensors.keys())
+        additional_inputs.sort()
+        inputs = [self.get_node_by_name("input").input]
+        for ai in additional_inputs:
+            inputs.append(additional_inputs_tensors[ai])
         outputs = [resolved_nodes[o] for o in self.outputs]
 
-        return Model(inputs=input, outputs = outputs)
+        return Model(inputs=inputs, outputs = outputs)
