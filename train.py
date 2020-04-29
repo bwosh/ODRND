@@ -20,7 +20,7 @@ model.save(model_path)
 
 # FLOPS check
 if run_check_flops:
-    from utils.flops import get_flops
+    from models.core.flops import get_flops
     get_flops(model_path)
 
 # Test code 

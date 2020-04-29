@@ -44,12 +44,10 @@ class DatasetSample:
 
         temp = np.zeros((h,w), dtype=float)
         for class_id in class_ids:
-            print("Class", class_id)
             heatmap = np.zeros((h,w), dtype=float)
 
             for bbox in self.bboxes:
                 if bbox.class_id == class_id:
-                    print(bbox)
                     x1 = int(bbox.x1 * w / ow)
                     y1 = int(bbox.y1 * h / oh)
                     x2 = int(bbox.x2 * w / ow)
@@ -77,9 +75,31 @@ class DatasetSample:
         else:
             return map
 
-    def get_height_width_map(self, target_size=None):
-        # TODO h_w map
-        return self.get_image_as_rgb_array(target_size)
+    def get_height_width_maps(self, target_size=None):
+        img = self.get_image_as_rgb_array(target_size)
+
+        oh, ow, _ = self.original_img_size
+        h, w, _ = img.shape
+
+        wh = np.zeros((h,w,2), dtype=float)
+        mask = np.zeros((h,w), dtype=float)
+        for bbox in self.bboxes:
+                x1 = int(bbox.x1 * w / ow)
+                y1 = int(bbox.y1 * h / oh)
+                x2 = int(bbox.x2 * w / ow)
+                y2 = int(bbox.y2 * h / oh)
+
+                width = x2 - x1
+                height = y2 - y1
+
+                cx = x1 + width//2
+                cy = y1 + height//2
+
+                wh[cy,cx,0] = w
+                wh[cy,cx,0] = h
+                mask[cy,cx] = 1
+
+        return wh, mask
 
     def draw_bboxes(self, target_size=None):
         img = self.get_image_as_rgb_array(target_size)
