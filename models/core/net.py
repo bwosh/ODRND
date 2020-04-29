@@ -7,3 +7,6 @@ class Net():
 
     def summary(self):
         return self.model.summary()
+
+    def save(self, path):
+        self.model.save(path)

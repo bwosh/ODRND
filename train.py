@@ -1,9 +1,12 @@
+# Imports
 from models.core.net import Net
-
 from models.simple_fpn import get_arch
 
 # Parameters
 num_classes = 3
+run_check_flops = True
+run_test_code = False
+model_path = './assets/model.h5'
 
 # Get network architecture
 arch = get_arch(num_classes)
@@ -11,7 +14,14 @@ arch = get_arch(num_classes)
 # Create model
 model = Net(arch)
 print( model.summary() )
+model.save(model_path)
+
+# FLOPS check
+if run_check_flops:
+    from utils.flops import get_flops
+    get_flops(model_path)
 
 # Test code 
-from debug.checks import test_bbox_hm
-test_bbox_hm()
+if run_test_code:
+    from debug.checks import test_bbox_hm
+    test_bbox_hm()
