@@ -4,8 +4,9 @@ from models.simple_fpn import get_arch
 
 # Parameters
 num_classes = 3
-run_check_flops = True
-run_test_code = False
+run_check_flops = False
+run_test_code = True
+print_model_summary = False
 model_path = './assets/model.h5'
 
 # Get network architecture
@@ -13,7 +14,8 @@ arch = get_arch(num_classes)
 
 # Create model
 model = Net(arch)
-print( model.summary() )
+if print_model_summary:
+    model.summary()
 model.save(model_path)
 
 # FLOPS check

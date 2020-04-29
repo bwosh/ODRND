@@ -65,8 +65,6 @@ class NetArchitecture:
             # No node found yet there are unresolved
             if node_to_process is None:
                 raise("Cannot resolve model")
-            else:
-                print("Handling node:", node_to_process.name)
 
             # Gathering dependencies
             inputs = []
@@ -80,14 +78,6 @@ class NetArchitecture:
 
         # create model
         intput = self.get_node_by_name("input").input
-        print(input)
-        print(self.outputs)
-
-        for k in resolved_nodes:
-            print("resolved",k, resolved_nodes[k])
-
         outputs = [resolved_nodes[o] for o in self.outputs]
-        for o in outputs:
-            print(o)
 
         return Model(inputs=input, outputs = outputs)
