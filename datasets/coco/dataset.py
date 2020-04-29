@@ -57,15 +57,16 @@ class CocoDataset(Dataset):
                 del images_bboxes[image_id]
         print(f"{len(images_bboxes)} images meet criteria.")
 
-        self.download_images(images_annots)
+        self.download_images(images_bboxes, images_annots)
         self.images_bboxes = images_bboxes
 
-    def download_images(self, images_annots):
+    def download_images(self, images_bboxes, images_annots):
         ann_dict = {}
         for i in images_annots:
             image_id = i['id']
             url = i['coco_url']
-            ann_dict[image_id] = url
+            if image_id in images_bboxes:
+                ann_dict[image_id] = url
 
         for image_id in tqdm(ann_dict):
             source_url = ann_dict[image_id]
@@ -76,7 +77,7 @@ class CocoDataset(Dataset):
                 download(source_url, target_path)
 
     def __len__(self):
-        raise Exception("Not implmented")
+        return len(self.images_bboxes)
 
     def __getitem__(self, index) -> DatasetSample:
         raise Exception("Not implmented")   
