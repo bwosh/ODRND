@@ -8,6 +8,8 @@ from datasets.base import Dataset
 from datasets.sample import DatasetSample
 from datasets.utils import download, ensure_dir
 
+from objects.bbox import BBox, BBoxList
+
 class CocoDataset(Dataset):
     def __init__(self, coco_subset_name:str, annot_path:str, supercategories: list):
         super().__init__(f"COCO_{coco_subset_name}")
@@ -57,8 +59,10 @@ class CocoDataset(Dataset):
                 del images_bboxes[image_id]
         print(f"{len(images_bboxes)} images meet criteria.")
 
+        self.filenames = {}
         self.download_images(images_bboxes, images_annots)
         self.images_bboxes = images_bboxes
+        self.image_ids = list(self.images_bboxes.keys())
 
     def download_images(self, images_bboxes, images_annots):
         ann_dict = {}
@@ -72,6 +76,7 @@ class CocoDataset(Dataset):
             source_url = ann_dict[image_id]
             _, file_extension = os.path.splitext(os.path.basename(source_url))
             target_path = f"./cache/{self.coco_subset_name}/{image_id}{file_extension}"
+            self.filenames[image_id] = target_path
             if not os.path.isfile(target_path):
                 ensure_dir(target_path)
                 download(source_url, target_path)
@@ -80,5 +85,16 @@ class CocoDataset(Dataset):
         return len(self.images_bboxes)
 
     def __getitem__(self, index) -> DatasetSample:
-        # TODO get coco dataset item
-        raise Exception("Not implmented")   
+        image_id = self.image_ids[index]
+        bboxes = self.images_bboxes[image_id]
+        filename = self.filenames[image_id]
+
+        bbox_list = BBoxList()
+        # TODO
+        for bb in bboxes:
+            (x1,y1,x2,y2), class_id = bb
+            bbox = BBox(x1,y1,x2,y2,class_id,str(class_id))
+            bbox_list.append(bbox)
+
+        sample = DatasetSample(filename, bbox_list) # TODO original image size ?
+        return sample
