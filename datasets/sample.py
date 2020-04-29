@@ -17,15 +17,18 @@ class DatasetSample:
         if self.original_img_size is not None:
             return self.original_img_size
 
-        img = cv2.imread(self.img_path)
+        img = self.get_image_as_rgb_array()
         self.original_img_size = img.shape
         return self.original_img_size
 
     def get_image_as_rgb_array(self, target_size=None):
         img = cv2.imread(self.img_path)
-        self.original_img_size = img.shape
 
-        # TODO convert if grayscale
+        # convert grayscale to rgb
+        if len(img.shape)==2:
+            img = cv2.cvtColor(img, cv2.CV_GRAY2RGB)
+            
+        self.original_img_size = img.shape
 
         if target_size is not None:
             img = cv2.resize(img, target_size, interpolation=cv2.INTER_AREA)
