@@ -8,7 +8,7 @@ from models.core.architecture import NetArchitecture
 def inputs_getter(ds:Dataset, index:int):
     sample = ds[index]
     input_image = sample.get_image_as_rgb_array()
-    input_mask = np.zeros((32,32,1)) # TODO 
+    input_mask = np.zeros((32,32,1)) # TODO ??? (dataset vs this) move definition elsewhere, fill with proper data
     return input_image, input_image
 
 def get_arch(num_classes:int)->NetArchitecture:

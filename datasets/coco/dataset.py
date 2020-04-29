@@ -90,7 +90,7 @@ class CocoDataset(Dataset):
         filename = self.filenames[image_id]
 
         bbox_list = BBoxList()
-        # TODO
+
         for bb in bboxes:
             (x1,y1,x2,y2), class_id = bb
             bbox = BBox(x1,y1,x2,y2,class_id,str(class_id))

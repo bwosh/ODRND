@@ -31,5 +31,5 @@ class Generator():
         pass
 
     def __data_generation(self, list_IDs_temp):
-        # TODO
+        # TODO __data_generation
         pass
