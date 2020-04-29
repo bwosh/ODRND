@@ -1,12 +1,22 @@
+import numpy as np
+
+from datasets.base import Dataset
+
 from models.core.blocks import *
 from models.core.architecture import NetArchitecture
+
+def inputs_getter(ds:Dataset, index:int):
+    sample = ds[index]
+    input_image = sample.get_image_as_rgb_array()
+    input_mask = np.zeros((32,32,1)) # TODO 
+    return input_image, input_image
 
 def get_arch(num_classes:int)->NetArchitecture:
 
     arch_definition = [
         InputBlock((256,256,3)),
 
-        ConvBnReluMaxPool("L0",["input"], filters=8,  kernel=3, padding='same', max_pool=2),
+        ConvBnReluMaxPool("L0",["input"], filters=8,   kernel=3, padding='same', max_pool=2),
         ConvBnReluMaxPool("L1",["L0"],    filters=16,  kernel=3, padding='same', max_pool=2),
         ConvBnReluMaxPool("L2",["L1"],    filters=32,  kernel=3, padding='same', max_pool=2),
         ConvBnReluMaxPool("L3",["L2"],    filters=32,  kernel=3, padding='same', max_pool=2),
@@ -24,5 +34,6 @@ def get_arch(num_classes:int)->NetArchitecture:
     ]
 
     outputs = ["HM","WH"]
+    losses = ["mse","mse"]
 
-    return NetArchitecture(arch_definition, outputs)
+    return NetArchitecture(arch_definition, outputs), inputs_getter, losses

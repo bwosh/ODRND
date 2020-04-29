@@ -49,7 +49,7 @@ The code may be using some concepts described in:
 **Simplicity:**
 - [Frustratingly Simple Few-Shot Object Detection](https://arxiv.org/pdf/2003.06957v1.pdf) [Mar 2020]
 
-**Data agmentation:**
+**Data augmentation:**
 - [Albumentations: fast and flexible image
 augmentations](https://arxiv.org/pdf/1809.06839.pdf) [Sep 2018]
 - [AUGMIX: A SIMPLE DATA PROCESSING METHOD TO

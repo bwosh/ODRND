@@ -80,4 +80,5 @@ class CocoDataset(Dataset):
         return len(self.images_bboxes)
 
     def __getitem__(self, index) -> DatasetSample:
+        # TODO get coco dataset item
         raise Exception("Not implmented")   
