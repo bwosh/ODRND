@@ -1,4 +1,6 @@
 import numpy as np
+import os
+import urllib.request
 
 def gaussian_radius(det_size, min_overlap=0.7):
   height, width = det_size
@@ -21,3 +23,11 @@ def gaussian_radius(det_size, min_overlap=0.7):
   sq3 = np.sqrt(b3 ** 2 - 4 * a3 * c3)
   r3  = (b3 + sq3) / 2
   return min(r1, r2, r3)
+
+def download(url, target_path):
+  filename, headers = urllib.request.urlretrieve(url, target_path)
+
+def ensure_dir(file_path):
+  directory = os.path.dirname(file_path)
+  if not os.path.exists(directory):
+      os.makedirs(directory)

@@ -4,10 +4,15 @@ from models.simple_fpn import get_arch
 
 # Parameters
 num_classes = 3
-print_model_summary = True
+print_model_summary = False
 run_check_flops = False
 run_test_code = False
 model_path = './assets/model.h5'
+
+# Test dataset
+from datasets.coco.dataset import CocoDataset
+ds = CocoDataset("VAL2017", "./cache/instances_val2017.json", ["person","vehicle","animal"])
+exit(0)
 
 # Get network architecture
 arch = get_arch(num_classes)

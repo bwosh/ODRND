@@ -17,6 +17,7 @@ Used versions of libraries during development:
 - numpy : 1.18.2
 - OpenCV : 4.2.0
 - scipy : 1.4.1
+- tqdm: 4.44.1
 
 # References
 
