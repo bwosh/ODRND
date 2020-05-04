@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from tensorflow.keras import optimizers
+from tensorflow.keras.callbacks import TensorBoard
 
 from models.core.net import Net, NetArchitecture
 from datasets.base import Dataset
@@ -14,11 +17,15 @@ def get_optimizer(opts):
 def train(architecture:NetArchitecture, net:Net, dataset:Dataset, val_dataset:Dataset, opts):
     print("Training...")
 
+    logdir = "logs/scalars/" + datetime.now().strftime("%Y%m%d-%H%M%S")
+    tensorboard_callback = TensorBoard(log_dir=logdir)
+
     net.model.compile(loss=architecture.losses, optimizer=get_optimizer(opts))
 
     generator = Generator(dataset, architecture)
     val_generator = Generator(val_dataset, architecture)
 
-    net.model.fit(generator, epochs=2, verbose=1, validation_data=val_generator)
+    net.model.fit(generator, epochs=opts.epochs, verbose=1, validation_data=val_generator,
+                callbacks=[tensorboard_callback])
 
     # TODO add tensorboard

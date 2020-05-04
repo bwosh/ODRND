@@ -143,3 +143,4 @@ cython_debug/
 *.jpeg
 *.jpg
 cache/**
+logs/**

@@ -18,6 +18,7 @@ Used versions of libraries during development:
 - OpenCV : 4.2.0
 - scipy : 1.4.1
 - tqdm: 4.44.1
+- tensorboard: 2.1.1
 
 # References
 
