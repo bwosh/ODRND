@@ -46,13 +46,13 @@ def test_preds(model, dataset):
         # Model interaction
         pred = model.model.predict((img, mask))
 
-        #
+        # post-process
         hm = pred[0]
         wh = pred[1]
         pred_hm = hm[0]
         max_hm = np.max(pred_hm)
-        if max_hm!=0:
-            pred_hm = pred_hm/max_hm
+        #if max_hm!=0:
+        #    pred_hm = pred_hm/max_hm
         pred_hm = (np.clip(pred_hm,0,1)*255).astype('uint8')
         print(pred_hm.shape, np.min(pred_hm), np.mean(pred_hm), np.max(pred_hm))
 

@@ -6,14 +6,20 @@ from datasets.base import Dataset
 from models.core.net import NetArchitecture
 
 class Generator(Sequence):
-    def __init__(self, dataset:Dataset, architecture:NetArchitecture):
+    def __init__(self, dataset:Dataset, architecture:NetArchitecture, opts):
         self.dataset = dataset
 
         self.batch_size = 4
+        self.opts = opts
 
         self.input_size = architecture.input_shapes["input"]
         self.target_size = architecture.output_sizes
-        self.class_ids = [0,1,2] # TODO calc from dataset
+
+        class_ids = list(set(dataset.category_mapping.values()))
+        class_ids.sort()
+
+        self.class_ids = class_ids
+        self.index_map = np.arange(0,len(self.dataset), 1)
 
     def get_sample_data(self, item):
         img = item.get_image_as_rgb_array(self.input_size)/255
@@ -31,7 +37,7 @@ class Generator(Sequence):
 
         for index in range(batch_index*self.batch_size, (batch_index+1)*self.batch_size,1):
             if index < len(self.dataset):
-                item = self.dataset[index]
+                item = self.dataset[self.index_map[index]]
                 X, y = self.get_sample_data(item)
                 all_X.append(X)
                 all_y.append(y)
@@ -41,20 +47,7 @@ class Generator(Sequence):
         y0_input = np.stack([y[0] for y in all_y])
         y1_input = np.stack([y[1] for y in all_y])
 
-        #print(X0_input.shape)
-        #print(X1_input.shape)
-        #print(y0_input.shape)
-        #print(y1_input.shape)
-        #exit(0)
-
         return [X0_input, X1_input], [y0_input, y1_input]
 
     def on_epoch_end(self):
-        print("on_epoch_end")
-        # TODO shuffle data
-        pass
-
-    def __data_generation(self, list_IDs_temp):
-        print("__data_generation")
-        # TODO __data_generation
-        pass
+        np.random.shuffle(self.index_map)
