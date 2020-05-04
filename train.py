@@ -12,6 +12,8 @@ run_test_code = False
 model_path = './assets/model.h5'
 coco_dataset_name = "VAL2017"
 coco_dataset_path = "./cache/instances_val2017.json"
+coco_val_dataset_name = "VAL2017"
+coco_val_dataset_path = "./cache/instances_val2017.json"
 coco_supercategories = ["person", "vehicle", "animal"]
 num_classes = len(coco_supercategories)
 
@@ -23,6 +25,7 @@ if run_test_code:
 
 # Get dataset
 dataset = CocoDataset(coco_dataset_name, coco_dataset_path, coco_supercategories)
+val_dataset = CocoDataset(coco_val_dataset_name, coco_val_dataset_path, coco_supercategories)
 
 # Get network architecture
 arch, losses = get_arch(num_classes)
@@ -38,6 +41,6 @@ if run_check_flops:
     get_flops(model_path)
 
 # Training
-model.load(model_path) # TODO only optionally
-train(arch, model, dataset, losses)
+model.load(model_path) # TODO params->only optionally load
+train(arch, model, dataset, val_dataset, losses)
 model.save(model_path)
