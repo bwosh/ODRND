@@ -31,7 +31,6 @@ arch, inputs_getter, losses = get_arch(num_classes)
 model = Net(arch)
 if print_model_summary:
     model.summary()
-model.save(model_path)
 
 # FLOPS check
 if run_check_flops:
@@ -39,4 +38,6 @@ if run_check_flops:
     get_flops(model_path)
 
 # Training
+model.load(model_path) # TODO only optionally
 train(model, dataset, inputs_getter, losses)
+model.save(model_path)

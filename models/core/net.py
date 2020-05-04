@@ -1,3 +1,6 @@
+import os
+from tensorflow import keras
+
 from models.core.architecture import NetArchitecture
 
 class Net():
@@ -9,4 +12,10 @@ class Net():
         return self.model.summary()
 
     def save(self, path):
+        print(f"Saving model ({path}).")
         self.model.save(path)
+
+    def load(self, path):
+        if os.path.isfile(path):
+            print(f"Loading model ({path}).")
+            self.model = keras.models.load_model(path)

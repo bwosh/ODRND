@@ -30,7 +30,7 @@ def get_arch(num_classes:int)->NetArchitecture:
         MergeLayers("MER",["L2","L3u1","L4u2", "L5u3"]),
 
         ConvReluMap("HM",["MER"], num_classes, filters=256),
-        ConvReluMap("WH",["MER"], num_classes, filters=256, map_mask="WH_mask", map_mask_shape=(32,32,1)),
+        ConvReluMap("WH",["MER"], 1, filters=256, map_mask="WH_mask", map_mask_shape=(32,32,1)),
     ]
 
     outputs = ["HM","WH"]

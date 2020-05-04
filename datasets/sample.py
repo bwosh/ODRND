@@ -86,7 +86,7 @@ class DatasetSample:
         h, w, _ = img.shape
 
         wh = np.zeros((h,w,2), dtype=float)
-        mask = np.zeros((h,w), dtype=float)
+        mask = np.zeros((h,w, 1), dtype=float)
         for bbox in self.bboxes:
                 x1 = int(bbox.x1 * w / ow)
                 y1 = int(bbox.y1 * h / oh)
