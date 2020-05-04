@@ -1,22 +1,24 @@
+from tensorflow.keras import optimizers
+
 from models.core.net import Net, NetArchitecture
 from datasets.base import Dataset
 from training.generator import Generator
 
-def train(architecture:NetArchitecture, net:Net, dataset:Dataset, val_dataset:Dataset,losses):
+def get_optimizer(opts):
+    if opts.optimizer == "sgd":
+        return optimizers.SGD(lr=opts.lr)
+
+    raise Exception("unknown optimizer")
+    
+
+def train(architecture:NetArchitecture, net:Net, dataset:Dataset, val_dataset:Dataset, opts):
     print("Training...")
 
-    # TODO move compile elsewhere?
-
-    net.model.compile(loss=losses, optimizer='sgd')
+    net.model.compile(loss=architecture.losses, optimizer=get_optimizer(opts))
 
     generator = Generator(dataset, architecture)
     val_generator = Generator(val_dataset, architecture)
 
     net.model.fit(generator, epochs=2, verbose=1, validation_data=val_generator)
-    #fit_generator(generator, steps_per_epoch=None, epochs=1, verbose=1, callbacks=None, validation_data=None, validation_steps=None, validation_freq=1, class_weight=None, max_queue_size=10, workers=1, use_multiprocessing=False, shuffle=True, initial_epoch=0)
 
-    #x = dataset[0]
-    #print(x)
-
-    # TODO training
     # TODO add tensorboard

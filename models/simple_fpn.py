@@ -35,4 +35,4 @@ def get_arch(num_classes:int)->NetArchitecture:
     outputs = ["HM","WH"]
     losses = ["mse","mse"]
 
-    return NetArchitecture(arch_definition, outputs, input_shapes, output_sizes), losses
+    return NetArchitecture(arch_definition, outputs, input_shapes, output_sizes, losses)
