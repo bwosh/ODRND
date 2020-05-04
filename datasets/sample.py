@@ -31,7 +31,7 @@ class DatasetSample:
         self.original_img_size = img.shape
 
         if target_size is not None:
-            h,w,_ = target_size # TODO target size should be 2-dim
+            h,w = target_size [0], target_size [1]
             img = cv2.resize(img, (w,h), interpolation=cv2.INTER_AREA)
 
         self.img_size = img.shape

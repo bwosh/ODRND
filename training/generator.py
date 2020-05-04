@@ -3,15 +3,16 @@ import numpy as np
 from tensorflow.keras.utils import Sequence
 
 from datasets.base import Dataset
+from models.core.net import NetArchitecture
 
 class Generator(Sequence):
-    def __init__(self, dataset:Dataset):
+    def __init__(self, dataset:Dataset, architecture:NetArchitecture):
         self.dataset = dataset
 
         self.batch_size = 4
 
-        self.input_size = (256,256,3) # TODO move input size elsewhere
-        self.target_size = (32,32, 3) # TODO move input size elsewhere
+        self.input_size = architecture.input_shapes["input"]
+        self.target_size = architecture.output_sizes
         self.class_ids = [0,1,2]
 
     def get_sample_data(self, item):

@@ -5,16 +5,15 @@ from datasets.base import Dataset
 from models.core.blocks import *
 from models.core.architecture import NetArchitecture
 
-def inputs_getter(ds:Dataset, index:int):
-    sample = ds[index]
-    input_image = sample.get_image_as_rgb_array()
-    input_mask = np.zeros((32,32,1)) # TODO ??? (dataset vs this) move definition elsewhere, fill with proper data
-    return input_image, input_image
-
 def get_arch(num_classes:int)->NetArchitecture:
+    input_shape = (256,256,3)
+    mask_shape = (32,32,1)
+
+    input_shapes = { "input": input_shape, "WH_mask": mask_shape }
+    output_sizes = [mask_shape[0],mask_shape[1]]
 
     arch_definition = [
-        InputBlock((256,256,3)),
+        InputBlock(input_shape),
 
         ConvBnReluMaxPool("L0",["input"], filters=8,   kernel=3, padding='same', max_pool=2),
         ConvBnReluMaxPool("L1",["L0"],    filters=16,  kernel=3, padding='same', max_pool=2),
@@ -30,10 +29,10 @@ def get_arch(num_classes:int)->NetArchitecture:
         MergeLayers("MER",["L2","L3u1","L4u2", "L5u3"]),
 
         ConvReluMap("HM",["MER"], num_classes, filters=256),
-        ConvReluMap("WH",["MER"], 1, filters=256, map_mask="WH_mask", map_mask_shape=(32,32,1)),
+        ConvReluMap("WH",["MER"], 1, filters=256, map_mask="WH_mask", map_mask_shape=mask_shape),
     ]
 
     outputs = ["HM","WH"]
     losses = ["mse","mse"]
 
-    return NetArchitecture(arch_definition, outputs), inputs_getter, losses
+    return NetArchitecture(arch_definition, outputs, input_shapes, output_sizes), losses

@@ -3,10 +3,12 @@ from tensorflow.keras.models import Model
 from models.core.blocks import InputBlock, ConvReluMap
 
 class NetArchitecture:
-    def __init__(self, arch_definition, outputs):
+    def __init__(self, arch_definition, outputs, input_shapes, output_sizes):
         self.arch_definition = arch_definition
         self.outputs = outputs
         self.nodes = self.__get_nodes()
+        self.input_shapes = input_shapes
+        self.output_sizes = output_sizes
 
     def __get_nodes(self)->dict:
         nodes = {}

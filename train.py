@@ -25,7 +25,7 @@ if run_test_code:
 dataset = CocoDataset(coco_dataset_name, coco_dataset_path, coco_supercategories)
 
 # Get network architecture
-arch, inputs_getter, losses = get_arch(num_classes)
+arch, losses = get_arch(num_classes)
 
 # Create model
 model = Net(arch)
@@ -39,5 +39,5 @@ if run_check_flops:
 
 # Training
 model.load(model_path) # TODO only optionally
-train(model, dataset, inputs_getter, losses)
+train(arch, model, dataset, losses)
 model.save(model_path)
