@@ -13,10 +13,10 @@ class Generator(Sequence):
 
         self.input_size = architecture.input_shapes["input"]
         self.target_size = architecture.output_sizes
-        self.class_ids = [0,1,2]
+        self.class_ids = [0,1,2] # TODO calc from dataset
 
     def get_sample_data(self, item):
-        img = item.get_image_as_rgb_array(self.input_size)
+        img = item.get_image_as_rgb_array(self.input_size)/255
         hm = item.get_centers_heatmap(self.class_ids, self.target_size)
         wh, mask = item.get_height_width_maps(self.target_size)
 

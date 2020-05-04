@@ -92,7 +92,9 @@ class CocoDataset(Dataset):
         bbox_list = BBoxList()
 
         for bb in bboxes:
-            (x1,y1,x2,y2), class_id = bb
+            (x1,y1,w,h), class_id = bb
+            x2 = x1+w
+            y2 = y1+h
             bbox = BBox(x1,y1,x2,y2,class_id,str(class_id))
             bbox_list.append(bbox)
 

@@ -38,5 +38,11 @@ if opts.run_check_flops:
 # Training
 if opts.load_model:
     model.load(opts.model_path)
-train(arch, model, dataset, val_dataset, opts)
+if opts.epochs > 0:
+    train(arch, model, dataset, val_dataset, opts)
 model.save(opts.model_path)
+
+# Check predictions
+if opts.check_preds:
+    from debug.checks import test_preds
+    test_preds(model, val_dataset)
