@@ -33,13 +33,13 @@ Used versions of libraries during development:
 The code may be using some concepts described in:
 
 **Feature extraction:**  
+- [MobileNetV2: Inverted Residuals and Linear Bottlenecks](https://arxiv.org/pdf/1801.04381.pdf) [Jan 2018]
 - [Deep Layer Aggregation](https://arxiv.org/pdf/1707.06484.pdf) [Jul 2017]
 - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/pdf/1905.11946.pdf) [May 2019]
 - [EfficientDet: Scalable and Efficient Object Detection](https://arxiv.org/pdf/1911.09070.pdf) [Nov 2019]
 - [YOLOv4: Optimal Speed and Accuracy of Object Detection](https://arxiv.org/pdf/2004.10934.pdf) [Apr 2020]
 - [DetNAS: Backbone Search for Object Detection](https://arxiv.org/pdf/1903.10979.pdf) [Mar 2019]
 - [Depthwise Convolution is All You Need for Learning Multiple Visual Domains](https://arxiv.org/pdf/1902.00927.pdf) [Feb 2019]
-
 
 **Bounding box generation:**
 - [Objects as Points](https://arxiv.org/pdf/1904.07850.pdf) [Apr 2019]
