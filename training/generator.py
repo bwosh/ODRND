@@ -9,7 +9,7 @@ class Generator(Sequence):
     def __init__(self, dataset:Dataset, architecture:NetArchitecture, opts):
         self.dataset = dataset
 
-        self.batch_size = 4
+        self.batch_size = opts.batch_size
         self.opts = opts
 
         self.input_size = architecture.input_shapes["input"]

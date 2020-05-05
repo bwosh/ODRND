@@ -30,5 +30,8 @@ def train(architecture:NetArchitecture, net:Net, dataset:Dataset, val_dataset:Da
     generator = Generator(dataset, architecture, opts)
     val_generator = Generator(val_dataset, architecture, opts)
 
-    net.model.fit(generator, epochs=opts.epochs, verbose=1, validation_data=val_generator,
-                callbacks=[tensorboard_callback])
+    val_data = None
+    if opts.validate:
+        val_data = val_generator
+    net.model.fit(generator, epochs=opts.epochs, verbose=1, validation_data=val_data,
+                callbacks=[tensorboard_callback], max_queue_size=10, workers=8, use_multiprocessing=False)

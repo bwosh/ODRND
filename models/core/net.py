@@ -13,9 +13,9 @@ class Net():
 
     def save(self, path):
         print(f"Saving model ({path}).")
-        self.model.save(path)
+        self.model.save_weights(path)
 
     def load(self, path):
         if os.path.isfile(path):
             print(f"Loading model ({path}).")
-            self.model = keras.models.load_model(path)
+            self.model.load_weights(path)

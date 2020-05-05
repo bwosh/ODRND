@@ -26,6 +26,8 @@ def get_args():
     parser.add_argument("--optimizer", type=str, default='sgd')
     parser.add_argument("--lr", type=float, default=1e-5)
     parser.add_argument("--epochs", type=int, default=0)
+    parser.add_argument("--batch_size", type=int, default=8)
+    parser.add_argument("--validate", action="store_true")
 
     args = parser.parse_args()
     return args

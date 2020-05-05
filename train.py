@@ -1,9 +1,13 @@
+# Issue fixes 
+from models.core.utils import init_keras
+init_keras()
+
 # Imports
 from datasets.coco.dataset import CocoDataset
 
 from models.core.net import Net
-from models.simple_fpn import get_arch
-from training.training import train
+from models.tests.simple_fpn import get_arch
+from training.training_cn import train
 
 from opts import get_args
 
