@@ -1,4 +1,4 @@
-# TODO delete?
+# TODO training_cn - to be reviewed
 
 from datetime import datetime
 

@@ -98,5 +98,5 @@ class CocoDataset(Dataset):
             bbox = BBox(x1,y1,x2,y2,class_id,str(class_id))
             bbox_list.append(bbox)
 
-        sample = DatasetSample(filename, bbox_list) # IMPROVEMENT add original image size ?
+        sample = DatasetSample(filename, bbox_list) # TODO IMPROVEMENT add original image size ?
         return sample

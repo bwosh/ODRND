@@ -4,21 +4,22 @@ def get_args():
     parser = argparse.ArgumentParser()
 
     # DATASET
-    parser.add_argument("--train_ds_name", type=str, default="TRAIN2017")
-    parser.add_argument("--train_ds_path", type=str, default="./cache/instances_train2017.json")
+    parser.add_argument("--train_ds_name", type=str, default="VAL2017")
+    parser.add_argument("--train_ds_path", type=str, default="./cache/instances_val2017.json")
 
     parser.add_argument("--val_ds_name", type=str, default="VAL2017")
     parser.add_argument("--val_ds_path", type=str, default="./cache/instances_val2017.json")
 
     parser.add_argument("--supercategories", type=str, default="person,vehicle,animal")
 
+    # Model
+    parser.add_argument("--model", type=str, default="ssdlitemn2")
 
     # Test flags
-    parser.add_argument("--print_model_summary", action="store_true")
-    parser.add_argument("--run_check_flops", action="store_true")
-    parser.add_argument("--run_test_code", action="store_true")
-    parser.add_argument("--check_preds", action="store_true")
-    parser.add_argument("--zero_mask_loss", action="store_true")
+    parser.add_argument("--summary", action="store_true")
+    parser.add_argument("--flops", action="store_true")
+    parser.add_argument("--pred", action="store_true")
+    parser.add_argument("--model_flops_path", type=str, default='./assets/model_flops.h5')
 
     # Training
     parser.add_argument("--load_model", type=bool, default=True)

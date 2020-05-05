@@ -1,4 +1,4 @@
-# TODO delete?
+# TODO training_cd generator - to be reviewed
 
 import numpy as np
 

@@ -5,7 +5,7 @@ from tensorflow.keras.layers import Input, Conv2D, GlobalAveragePooling2D, Dense
 from tensorflow.keras.models import Sequential, Model
 
 def activation(x, name):
-    return ReLU(name=f"{name}_relu")(x) # TODO change to relu6
+    return ReLU(name=f"{name}_relu")(x) # TODO relu6
 
 def conv_bn(name, x, filters, stride, use_batch_norm=True):
 
@@ -35,22 +35,22 @@ def ir(name, x, inp, filters, stride, expand_ratio, use_batch_norm=True):
     orig_x = x
 
     if expand_ratio==1:
-        x = gconv2d(f"{name}_gconv_dw", x, hidden_dim, 3, strides=stride, padding='same', use_bias=False, groups = hidden_dim)
+        x = gconv2d(f"{name}_dwconv", x, hidden_dim, 3, strides=stride, padding='same', use_bias=False, groups = hidden_dim)
         if use_batch_norm:
             x = BatchNormalization(name = f"{name}_bn0")(x)
         x = activation(x, name = f"{name}_act")
-        x = Conv2D(filters, 1, strides=1, padding='valid', use_bias=False, name = f"{name}_conv_pwl")(x)
+        x = Conv2D(filters, 1, strides=1, padding='valid', use_bias=False, name = f"{name}_pwlconv")(x)
         if use_batch_norm:
             x = BatchNormalization(name = f"{name}_bn1")(x)
     else:
-        x = Conv2D(hidden_dim, 1, strides=1, padding='valid', use_bias=False, name = f"{name}_conv_pw")(x)
+        x = Conv2D(hidden_dim, 1, strides=1, padding='valid', use_bias=False, name = f"{name}_pwconv")(x)
         if use_batch_norm:
             x = BatchNormalization(name = f"{name}_bn0")(x)
-        x = gconv2d(f"{name}_gconv_dw", x, hidden_dim, 3, strides=stride, padding='same', use_bias=False, groups = hidden_dim)
+        x = gconv2d(f"{name}_dwconv", x, hidden_dim, 3, strides=stride, padding='same', use_bias=False, groups = hidden_dim)
         if use_batch_norm:
             x = BatchNormalization(name = f"{name}_bn1")(x)
         x = activation(x, name = f"{name}_act")
-        x = Conv2D(filters, 1, strides=1, padding='valid', use_bias=False, name = f"{name}_conv_pwl")(x)
+        x = Conv2D(filters, 1, strides=1, padding='valid', use_bias=False, name = f"{name}_pwlconv")(x)
         if use_batch_norm:
             x = BatchNormalization(name = f"{name}_bn2")(x)
 
