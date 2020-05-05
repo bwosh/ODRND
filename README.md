@@ -1,8 +1,6 @@
 # Object Detection Research & Development
 
-This repository implements top level mini-framework to allow fast creation of object detection neural networks with branches. 
-
-![architecture definition](./assets/arch_def.png)
+This repository is a space for Object Detecton Research with ARM-based devices performance in mind. 
 
 The project is developed exclusively by [Błażej Matuszewski](https://github.com/bwosh).
 
@@ -10,6 +8,16 @@ The project is developed exclusively by [Błażej Matuszewski](https://github.co
 
 The project is in very early stage.  
 Some concepts are being implemented.
+
+- [x] Coco dataset subset extraction
+- [ ] MobileNet v2 SSDLite baseline
+- [ ] Training with anchors
+- [ ] TFLite export
+- [ ] Quantization-aware training & TFLite quantized model
+- [ ] Tests on Snapdragon 439 based device (CPU, NNAPI)
+- [ ] Tweaking the hyperparameters to find optimal mAP vs FPS tradeoff
+- [ ] Training with heatmaps&sizes (CenterNet)
+- [ ] More models to test & compare
 
 # Dependencies
 Used versions of libraries during development:  
@@ -29,9 +37,13 @@ The code may be using some concepts described in:
 - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/pdf/1905.11946.pdf) [May 2019]
 - [EfficientDet: Scalable and Efficient Object Detection](https://arxiv.org/pdf/1911.09070.pdf) [Nov 2019]
 - [YOLOv4: Optimal Speed and Accuracy of Object Detection](https://arxiv.org/pdf/2004.10934.pdf) [Apr 2020]
+- [DetNAS: Backbone Search for Object Detection](https://arxiv.org/pdf/1903.10979.pdf) [Mar 2019]
+- [Depthwise Convolution is All You Need for Learning Multiple Visual Domains](https://arxiv.org/pdf/1902.00927.pdf) [Feb 2019]
+
 
 **Bounding box generation:**
 - [Objects as Points](https://arxiv.org/pdf/1904.07850.pdf) [Apr 2019]
+- [SSD: Single Shot MultiBox Detector](https://arxiv.org/pdf/1512.02325.pdf) [Dec 2016]
 
 **Low performace devices optimizations:**
 - [FaceBoxes: A CPU Real-time Face Detector with High Accuracy](https://arxiv.org/pdf/1708.05234.pdf) [Aug 2017]
@@ -39,6 +51,7 @@ The code may be using some concepts described in:
 - [CenterMask : Real-Time Anchor-Free Instance Segmentation](https://arxiv.org/pdf/1911.06667.pdf) [Nov 2019]
 - [ThunderNet: Towards Real-time Generic Object Detection](https://arxiv.org/pdf/1903.11752.pdf) [Mar 2019]
 - [An Energy and GPU-Computation Efficient Backbone Network for Real-Time Object Detection](https://arxiv.org/pdf/1904.09730v1.pdf) [Apr 2019]
+- [Fast and Accurate Convolutional Object Detectors for Real-time Embedded Platforms](https://arxiv.org/pdf/1909.10798.pdf) [Sep 2019]
 
 **High efficiency approaches:**
 - [FASTERSEG: SEARCHING FOR FASTER REAL-TIME SEMANTIC SEGMENTATION](https://arxiv.org/pdf/1912.10917.pdf) [Dec 2019]
