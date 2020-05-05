@@ -1,5 +1,3 @@
-# TODO add model base class (save, load, predict)
-
 # Mobilenet v2
 from tensorflow.keras.layers import Input, Conv2D, GlobalAveragePooling2D, Dense, ReLU, Dropout, BatchNormalization, DepthwiseConv2D, Add
 from tensorflow.keras.models import Sequential, Model
@@ -59,7 +57,7 @@ def ir(name, x, inp, filters, stride, expand_ratio, use_batch_norm=True):
     return x
 
 class MNv2:
-    def __init__(self, n_class=3, input_size=224, width_mult=1.,use_batch_norm=True, input_channel=32, last_channel=1280):
+    def __init__(self, n_class=3, input_size=224, width_mult=1.,use_batch_norm=True, input_channel=32, last_channel=1280, build_model=True):
         # Save initial settings
         self.n_class = n_class
         self.input_size = input_size
@@ -70,7 +68,8 @@ class MNv2:
         self.input_channel = int(input_channel * width_mult)
         self.last_channel = int(last_channel * width_mult) if width_mult > 1.0 else last_channel
 
-        self.model = self.build_model()
+        if build_model:
+            self.model = self.build_model()
 
     def build_model(self):
         model = Sequential()
