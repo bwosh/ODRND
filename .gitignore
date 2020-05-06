@@ -144,3 +144,8 @@ cython_debug/
 *.jpg
 cache/**
 logs/**
+
+# Docker specific
+.keras/keras.json
+.python_history
+.bash_history

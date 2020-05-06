@@ -3,6 +3,9 @@ import argparse
 def get_args():
     parser = argparse.ArgumentParser()
 
+    # GENERAL
+    parser.add_argument("--cache_path", type=str, default="../cache/")
+
     # DATASET
     parser.add_argument("--train_ds_name", type=str, default="VAL2017")
     parser.add_argument("--train_ds_path", type=str, default="../cache/instances_val2017.json")

@@ -13,8 +13,8 @@ coco_supercategories = opts.supercategories.split(',')
 num_classes = len(coco_supercategories)
 
 # Get dataset
-dataset = CocoDataset(opts.train_ds_name, opts.train_ds_path, coco_supercategories)
-val_dataset = CocoDataset(opts.val_ds_name, opts.val_ds_path, coco_supercategories)
+dataset = CocoDataset(opts.train_ds_name, opts.train_ds_path, coco_supercategories, opts)
+val_dataset = CocoDataset(opts.val_ds_name, opts.val_ds_path, coco_supercategories, opts)
 
 # Model
 model, train = get_model(opts.model)

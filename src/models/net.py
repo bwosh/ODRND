@@ -1,20 +1,18 @@
 import numpy as np
 import os
 
-from models.net import Net
-
 class Net():
-    def __init__(self, model: Net):
+    def __init__(self, model):
         self.model = model
 
     def summary(self):
         return self.model.model.summary()
 
-    def save(self, path):str:
+    def save(self, path:str):
         print(f"Saving model ({path}).")
         self.model.model.save_weights(path)
 
-    def save_full(self, path:str)::
+    def save_full(self, path:str):
         print(f"Saving model ({path}).")
         self.model.model.save(path)
 

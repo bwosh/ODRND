@@ -11,10 +11,11 @@ from datasets.utils import download, ensure_dir
 from objects.bbox import BBox, BBoxList
 
 class CocoDataset(Dataset):
-    def __init__(self, coco_subset_name:str, annot_path:str, supercategories: list):
+    def __init__(self, coco_subset_name:str, annot_path:str, supercategories: list, opts):
         super().__init__(f"COCO_{coco_subset_name}")
         self.supercategories = supercategories
         self.coco_subset_name = coco_subset_name
+        self.opts = opts
 
         # Load file
         print("Loading COCO subset:", coco_subset_name,"for",supercategories,'...')
@@ -75,7 +76,7 @@ class CocoDataset(Dataset):
         for image_id in tqdm(ann_dict):
             source_url = ann_dict[image_id]
             _, file_extension = os.path.splitext(os.path.basename(source_url))
-            target_path = f"./cache/{self.coco_subset_name}/{image_id}{file_extension}"
+            target_path = os.path.join(self.opts.cache_path,f"{self.coco_subset_name}/{image_id}{file_extension}")
             self.filenames[image_id] = target_path
             if not os.path.isfile(target_path):
                 ensure_dir(target_path)
