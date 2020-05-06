@@ -2,6 +2,7 @@ from tensorflow.keras.layers import Input
 from tensorflow.keras.models import Model
 
 from models.backbones.mobilenet import MNv2
+from models.utils.box_utils import SSDBoxSizes, SSDSpec, generate_ssd_priors
 
 class SSDLiteMN2:
     def __init__(self, n_class=3, input_size=300, width_mult=1.,use_batch_norm=True, input_channel=32, last_channel=1280):
@@ -15,9 +16,29 @@ class SSDLiteMN2:
             build_model=False)
 
         self.input_size = input_size
+        self.init_ssdspec()
 
         self.input = Input(shape=(self.input_size, self.input_size, 3))
         self.features = self.backbone.add_feature_layers(self.input)
         
         # TODO add ssd parts
         self.model = Model(inputs = self.input, outputs=self.features)
+
+    def init_ssdspec(self):
+
+        self.iou_threshold = 0.45
+        self.center_variance = 0.1
+        self.size_variance = 0.2
+
+        self.ssdspecs = [
+            SSDSpec(19, 16, SSDBoxSizes(60, 105), [2, 3]),
+            SSDSpec(10, 32, SSDBoxSizes(105, 150), [2, 3]),
+            SSDSpec(5, 64, SSDBoxSizes(150, 195), [2, 3]),
+            SSDSpec(3, 100, SSDBoxSizes(195, 240), [2, 3]),
+            SSDSpec(2, 150, SSDBoxSizes(240, 285), [2, 3]),
+            SSDSpec(1, 300, SSDBoxSizes(285, 330), [2, 3])
+        ]
+
+        # N*(x,y,w,h)
+        self.priors = generate_ssd_priors(self.ssdspecs, self.input_size)
+  
