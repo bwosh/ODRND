@@ -1,6 +1,6 @@
 # Object Detection Research & Development
 
-This open-source repository is a space for Object Detecton Research with ARM-based devices performance in mind (as well as supporting solutions as Edge TPU / VideoCore IV / NNAPI). 
+This open-source repository is a space for Object Detecton Research with ARM-based devices performance in mind (as well as supporting solutions as Edge TPU / CUDA / VideoCore IV / NNAPI). 
 
 ![object detection sample](./assets/sample_bbox.jpg)
 

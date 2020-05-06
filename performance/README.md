@@ -7,6 +7,7 @@ Performance tests is planned to be run one the devices listed here:
 - Raspberry Pi 3B+ (Broadcom BCM2837B0, ARMv8-A (64/32-bit), **4× Cortex-A53** 1.4 GHz)
 - Raspberry Pi 4 (Broadcom BCM2711, ARMv8-A (64/32-bit), **4× Cortex-A72** 1.5 GHz)
 - Google Coral Dev Board (NXP i.MX 8M SoC, ARMv8-A (64/32-bit), **4x Cortex-A53** 1.5 GHz +  Cortex-M4F + Edge TPU)
+- NVidia Jetson Nano (**4x Cortex-A57** + NVIDIA Maxwell GPU)
 - Xiaomi Redmi 7A (Snapdragon 439, ARMv8-A (64/32-bit), **8x Cortex-A53** 2 GHz + Adreno 505)
 
 Tweaks to check:
