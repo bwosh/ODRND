@@ -1,9 +1,5 @@
-def get_single_element(x:list):
-    if len(x)!=1:
-        raise Exception("Validation of exactly one element failed.")
-    return x[0]
-
 def init_keras():
+    print("Applying CUDNN runtime fix...")
     from tensorflow.compat.v1.keras.backend import set_session
     import tensorflow.compat.v1 as tf
     config = tf.ConfigProto()

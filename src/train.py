@@ -1,5 +1,5 @@
 # Issue fixes 
-from models.utils import init_keras
+from models.utils.fixes import init_keras
 init_keras()
 
 # Imports
@@ -27,12 +27,11 @@ if opts.epochs>0:
 
 # FLOPS check
 if opts.flops:
-    from models.flops import get_flops
+    from models.utils.flops import get_flops
     model.save_full(opts.model_flops_path)
     get_flops(opts.model_flops_path)
 
 # Check predictions
 if opts.pred:
-    # TODO adjust code
     from debug.checks import test_preds
     test_preds(model, val_dataset)
