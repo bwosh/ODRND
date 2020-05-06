@@ -6,10 +6,10 @@ This open-source repository is a space for Object Detecton Research with ARM-bas
 
 You can check the details:
 
-- **STATUS**: [Current status of the project](./status.md)
+- **STATUS**: [Current status of the project](./status.md#readme))
 - **SRC**: [Training the networks/Using the code](./src#readme)
-- **PERFORMANCE**: [Target devices and performance tests](./performance/README.md)
-- **REFERENCES**: [List of inspiring papers](./references.md)
+- **PERFORMANCE**: [Target devices and performance tests](./performance#readme)
+- **REFERENCES**: [List of inspiring papers](./references.md#readme)
 
 # License
 
