@@ -5,12 +5,12 @@ This open-source repository is a space for Object Detecton Research with ARM-bas
 ![object detection sample](./assets/sample_bbox.jpg)
 
 # Goals
-1. Push low-end Android device (**Xiaomi Redmi 7A**) to its object detection (3 classes) FPS limits using:
-    - recent findings in Computer Vision
-    - TFLite delegates for: NNAPI, GPU, Hexagon
-2. Push **Raspberry Pi Zero W** to its object detection (3 classes) FPS limits using:
-    - recent findings in Computer Vision
-    - OpenCL implementation on VideoCore IV GPU
+1. Push low-end Android device (**[Xiaomi Redmi 7A](https://www.gsmarena.com/xiaomi_redmi_7a-9716.php)**) to its object detection (3 classes) FPS limits using:
+    - [recent findings in Computer Vision](./assets/references.md#readme)
+    - TFLite delegates for: [NNAPI](https://www.tensorflow.org/lite/performance/nnapi), [GPU](https://www.tensorflow.org/lite/performance/gpu), [Hexagon](https://www.tensorflow.org/lite/performance/hexagon_delegate)
+2. Push **[Raspberry Pi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w/)** to its object detection (3 classes) FPS limits using:
+    - [recent findings in Computer Vision](./assets/references.md#readme)
+    - OpenCL implementation on [VideoCore IV GPU](https://github.com/doe300/VC4CL)
 
 *3 classes mentioned above are: person, vehicle, animal*
 # Details
