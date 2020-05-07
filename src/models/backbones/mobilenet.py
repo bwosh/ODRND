@@ -57,7 +57,7 @@ def ir(name, x, inp, filters, stride, expand_ratio, use_batch_norm=True):
     return x
 
 class MNv2:
-    def __init__(self, n_class=3, input_size=224, width_mult=1.,use_batch_norm=True, input_channel=32, last_channel=1280, build_model=True):
+    def __init__(self, n_class=3, input_size=300, width_mult=1.,use_batch_norm=True, input_channel=32, last_channel=1280, build_model=True):
         # Save initial settings
         self.n_class = n_class
         self.input_size = input_size

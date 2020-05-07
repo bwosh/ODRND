@@ -1,5 +1,6 @@
 import json
 import os
+import pickle
 
 from collections import defaultdict
 from tqdm import tqdm
@@ -19,8 +20,15 @@ class CocoDataset(Dataset):
 
         # Load file
         print("Loading COCO subset:", coco_subset_name,"for",supercategories,'...')
-        with open(annot_path, "r") as file:
-            annotations_data =json.load(file)
+        cache_path = annot_path+"_cache.pkl"
+        if os.path.isfile(cache_path):
+            with open(cache_path,'rb') as file:
+                self.image_ids, self.images_bboxes, self.filenames = pickle.load(file)
+                print(f"Loaded from cache ({len(self.image_ids)} images)...")
+                return
+        else:
+            with open(annot_path, "r") as file:
+                annotations_data = json.load(file)
 
         categories = annotations_data['categories']
         annotations = annotations_data['annotations']
@@ -64,6 +72,9 @@ class CocoDataset(Dataset):
         self.download_images(images_bboxes, images_annots)
         self.images_bboxes = images_bboxes
         self.image_ids = list(self.images_bboxes.keys())
+
+        with open(cache_path,'wb') as file:
+            pickle.dump((self.image_ids, self.images_bboxes, self.filenames), file)
 
     def download_images(self, images_bboxes, images_annots):
         ann_dict = {}

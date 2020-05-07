@@ -7,8 +7,8 @@ def get_args():
     parser.add_argument("--cache_path", type=str, default="../cache/")
 
     # DATASET
-    parser.add_argument("--train_ds_name", type=str, default="VAL2017")
-    parser.add_argument("--train_ds_path", type=str, default="../cache/instances_val2017.json")
+    parser.add_argument("--train_ds_name", type=str, default="TRAIN2017")
+    parser.add_argument("--train_ds_path", type=str, default="../cache/instances_train2017.json")
 
     parser.add_argument("--val_ds_name", type=str, default="VAL2017")
     parser.add_argument("--val_ds_path", type=str, default="../cache/instances_val2017.json")
