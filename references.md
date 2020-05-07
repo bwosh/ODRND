@@ -39,6 +39,9 @@ augmentations](https://arxiv.org/pdf/1809.06839.pdf) [Sep 2018]
 - [AUGMIX: A SIMPLE DATA PROCESSING METHOD TO
 IMPROVE ROBUSTNESS AND UNCERTAINTY](https://arxiv.org/pdf/1912.02781.pdf) [Dec 2019]
 
+**Device information:**
+- [AI Benchmark: All About Deep Learning on Smartphones in 2019](https://arxiv.org/pdf/1910.06663.pdf) [Oct 2019]
+
 **Surveys:**
 - [Recent Advances in Object Detection in the Age of Deep Convolutional Neural Networks](https://arxiv.org/pdf/1809.03193.pdf) [Sep 2018]
 - [Deep Learning for Generic Object Detection: A Survey](https://arxiv.org/pdf/1809.02165.pdf) [Sep 2018]

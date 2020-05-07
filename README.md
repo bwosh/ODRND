@@ -1,10 +1,20 @@
 # Object Detection Research & Development
 
-This open-source repository is a space for Object Detecton Research with ARM-based devices performance in mind (as well as supporting solutions as Edge TPU / CUDA / VideoCore IV / NNAPI). 
+This open-source repository is a space for Object Detecton Research with ARM-based devices performance in mind.
 
 ![object detection sample](./assets/sample_bbox.jpg)
 
-You can check the details:
+# Goals
+1. Push low-end Android device (Xiaomi Redmi 7A) to its object detection FPS LIMITS using:
+    - recent findings in Computer Vision
+    - TFLite delegates for: NNAPI, GPU, Hexagon
+2. Push Raspberry Pi Zero W to its object detection FPS limits using:
+    - recent findings in Computer Vision
+    - OpenCL implementation on VideoCore IV GPU
+
+# Details
+
+You can navigate to the details here:
 
 - **STATUS**: [Current status of the project](./status.md#readme)
 - **SRC**: [Training the networks/Using the code](./src#readme)
