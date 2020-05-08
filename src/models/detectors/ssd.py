@@ -1,3 +1,7 @@
+from collections import namedtuple
+
+GraphPath = namedtuple("GraphPath", ['s0', 'name', 's1'])
+
 class SSD:
     def __init__(self, n_class, backbone, source_layer_indexes,
                          extras, classification_headers, regression_headers):

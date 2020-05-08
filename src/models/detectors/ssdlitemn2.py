@@ -1,8 +1,8 @@
-from tensorflow.keras.layers import Input
+from tensorflow.keras.layers import Input, SeparableConv2D, Conv2D
 from tensorflow.keras.models import Model
 
 from models.backbones.mobilenet import MNv2
-from models.detectors.ssd import SSD
+from models.detectors.ssd import SSD, GraphPath
 from models.utils.box_utils import SSDBoxSizes, SSDSpec, generate_ssd_priors
 
 class SSDLiteMN2:
@@ -21,11 +21,10 @@ class SSDLiteMN2:
 
         self.input = Input(shape=(self.input_size, self.input_size, 3))
         self.features = self.backbone.add_feature_layers(self.input)
+        self.n_class = n_class
         
-        # TODO add ssd parts
         self.backbone = Model(inputs = self.input, outputs=self.features)
-        source_layer_indexes = []
-        extras, classification_headers, regression_headers = self.create_ssd_parts()
+        source_layer_indexes, extras, classification_headers, regression_headers = self.create_ssd_parts()
         self.model = SSD(n_class, self.backbone, source_layer_indexes,
                          extras, classification_headers, regression_headers)
 
@@ -48,5 +47,36 @@ class SSDLiteMN2:
         self.priors = generate_ssd_priors(self.ssdspecs, self.input_size)
   
     def create_ssd_parts(self):
-        # TODO ssd parts
-        return None, None, None
+
+        source_layer_indexes = [
+            GraphPath(14, 'conv', 3),
+            19,
+        ]
+
+        extras = [
+            lambda x: inverted_residual("E0", x, 1280, 512, stride=2, expand_ratio=0.2),
+            lambda x: inverted_residual("E1", x, 512, 256, stride=2, expand_ratio=0.25),
+            lambda x: inverted_residual("E2", x, 256, 256, stride=2, expand_ratio=0.5),
+            lambda x: inverted_residual("E3", x, 256, 54, stride=2, expand_ratio=0.25),
+
+        ]
+
+        regression_headers = [
+            SeparableConv2D(6*4, kernel_size=3, padding='same', name="RH0"),
+            SeparableConv2D(6*4, kernel_size=3, padding='same', name="RH1"),
+            SeparableConv2D(6*4, kernel_size=3, padding='same', name="RH2"),
+            SeparableConv2D(6*4, kernel_size=3, padding='same', name="RH3"),
+            SeparableConv2D(6*4, kernel_size=3, padding='same', name="RH4"),
+            Conv2D(6*4, kernel_size=1, padding='valid', name="RH5"),
+        ]
+
+        classification_headers = [
+            SeparableConv2D(6*self.n_class, kernel_size=3, padding='same', name="CH0"),
+            SeparableConv2D(6*self.n_class, kernel_size=3, padding='same', name="CH1"),
+            SeparableConv2D(6*self.n_class, kernel_size=3, padding='same', name="CH2"),
+            SeparableConv2D(6*self.n_class, kernel_size=3, padding='same', name="CH3"),
+            SeparableConv2D(6*self.n_class, kernel_size=3, padding='same', name="CH4"),
+            Conv2D(6*self.n_class, kernel_size=1, padding='valid', name="CH5"),
+        ]
+
+        return source_layer_indexes, extras, classification_headers, regression_headers
