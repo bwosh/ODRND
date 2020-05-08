@@ -20,7 +20,7 @@ val_dataset = CocoDataset(opts.val_ds_name, opts.val_ds_path, coco_supercategori
 
 # Model
 log("Creating model", title=True)
-model, train = get_model(opts.model)
+model, train = get_model(opts)
 if opts.summary:
     model.summary()
 

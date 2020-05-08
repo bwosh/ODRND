@@ -17,6 +17,8 @@ def get_args():
 
     # Model
     parser.add_argument("--model", type=str, default="ssdlitemn2")
+    parser.add_argument("--model_width", type=float, default=0.0625) # set to minimal 
+    
 
     # Test flags
     parser.add_argument("--summary", action="store_true")
