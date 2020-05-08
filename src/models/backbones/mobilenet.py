@@ -102,12 +102,10 @@ class MNv2:
         input_channel = self.input_channel
         for gid,(t, c, n, s) in enumerate(interverted_residual_setting):
             output_channel = int(c * self.width_mult)
-            print(f"{input_channel}->{output_channel}")
             for i in range(n):
                 name = f"IR{layer_num}_{gid}_{i}"
                 x = ir(name, x, input_channel, output_channel, s if i==0 else 1, 
                        expand_ratio=t, use_batch_norm=self.use_batch_norm)
-                print("   > ", x.shape)
                 input_channel = output_channel
                 layer_num+=1
 
