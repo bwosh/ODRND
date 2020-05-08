@@ -31,21 +31,23 @@ class SSD:
             rh_layer = regression_headers[layer_index]
             ch_layer = classification_headers[layer_index]
 
-            rh, ch = self.compute_headers(rh_layer(input_tensor) , ch_layer(input_tensor))
+            rh, ch = self.compute_headers(source_layer_name, rh_layer(input_tensor) , ch_layer(input_tensor))
             regression_header_tensors.append(rh)
             classification_header_tensors.append(ch)
 
-        locations = Concatenate(axis=1)(regression_header_tensors) 
-        confidences = Concatenate(axis=1)(classification_header_tensors) 
+        locations = Concatenate(axis=1, name="locations")(regression_header_tensors) 
+        confidences = Concatenate(axis=1, name="confidences")(classification_header_tensors) 
 
-        self.model = Model(inputs=input_layer, outputs=[confidences, locations])
+        output = Concatenate(axis=2, name="output")([confidences, locations])
+
+        self.model = Model(inputs=input_layer, outputs=output)
         
-    def compute_headers(self, rh_output, ch_output):
+    def compute_headers(self, name, rh_output, ch_output):
         res_shape = ch_output.shape[1]*ch_output.shape[2]*ch_output.shape[3]//self.n_class
-        ch_output = Reshape((res_shape, self.n_class))(ch_output)
+        ch_output = Reshape((res_shape, self.n_class), name=f"CH_{name}")(ch_output)
 
         res_shape = rh_output.shape[1]*rh_output.shape[2]*rh_output.shape[3]//4
-        rh_output = Reshape((res_shape, 4))(rh_output)
+        rh_output = Reshape((res_shape, 4), name=f"RH_{name}")(rh_output)
 
         return rh_output, ch_output
 
