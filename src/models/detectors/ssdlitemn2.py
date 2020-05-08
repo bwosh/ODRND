@@ -2,7 +2,8 @@ from tensorflow.keras.layers import Input, SeparableConv2D, Conv2D
 from tensorflow.keras.models import Model
 
 from models.backbones.mobilenet import MNv2
-from models.detectors.ssd import SSD, GraphPath
+from models.detectors.ssd import SSD
+from models.layers.ir import inverted_residual
 from models.utils.box_utils import SSDBoxSizes, SSDSpec, generate_ssd_priors
 
 class SSDLiteMN2:
@@ -20,12 +21,12 @@ class SSDLiteMN2:
         self.init_ssdspec()
 
         self.input = Input(shape=(self.input_size, self.input_size, 3))
-        self.features = self.backbone.add_feature_layers(self.input)
+        _, self.backbone_tensors = self.backbone.add_feature_layers(self.input)
         self.n_class = n_class
         
-        self.backbone = Model(inputs = self.input, outputs=self.features)
-        source_layer_indexes, extras, classification_headers, regression_headers = self.create_ssd_parts()
-        self.model = SSD(n_class, self.backbone, source_layer_indexes,
+        #self.backbone = Model(inputs = self.input, outputs=self.features)
+        source_layer_names, extras, classification_headers, regression_headers = self.create_ssd_parts()
+        self.model = SSD(n_class, self.input, self.backbone_tensors, source_layer_names,
                          extras, classification_headers, regression_headers)
 
     def init_ssdspec(self):
@@ -48,17 +49,21 @@ class SSDLiteMN2:
   
     def create_ssd_parts(self):
 
-        source_layer_indexes = [
-            GraphPath(14, 'conv', 3),
-            19,
+        source_layer_names = [
+            # Layer name, sublayer index if applicable
+            ("IR14_4_2", 2),
+            ("last", None),
+            ("E0", None),
+            ("E1", None),
+            ("E2", None),
+            ("E3", None)
         ]
 
         extras = [
-            lambda x: inverted_residual("E0", x, 1280, 512, stride=2, expand_ratio=0.2),
-            lambda x: inverted_residual("E1", x, 512, 256, stride=2, expand_ratio=0.25),
-            lambda x: inverted_residual("E2", x, 256, 256, stride=2, expand_ratio=0.5),
-            lambda x: inverted_residual("E3", x, 256, 54, stride=2, expand_ratio=0.25),
-
+            ("E0", lambda x: inverted_residual("E0", x, 1280, 512, stride=2, expand_ratio=0.2)),
+            ("E1",lambda x: inverted_residual("E1", x, 512, 256, stride=2, expand_ratio=0.25)),
+            ("E2",lambda x: inverted_residual("E2", x, 256, 256, stride=2, expand_ratio=0.5)),
+            ("E3",lambda x: inverted_residual("E3", x, 256, 64, stride=2, expand_ratio=0.25)),
         ]
 
         regression_headers = [
@@ -79,4 +84,4 @@ class SSDLiteMN2:
             Conv2D(6*self.n_class, kernel_size=1, padding='valid', name="CH5"),
         ]
 
-        return source_layer_indexes, extras, classification_headers, regression_headers
+        return source_layer_names, extras, classification_headers, regression_headers

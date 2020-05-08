@@ -46,7 +46,7 @@ class MNv2:
         input = Input(shape=(self.input_size, self.input_size, 3))
 
         # Features
-        x = self.add_feature_layers(input)
+        x = self.add_feature_layers(input), _
 
         model = Model(inputs = input, outputs=x)
 
@@ -64,7 +64,12 @@ class MNv2:
             [6, 320, 1, 1],
         ]
 
-        x = conv_bn("first", x, self.input_channel, 2)
+        layers_tensors={}
+
+        name = "first"
+        x = conv_bn(name, x, self.input_channel, 2)
+        layers_tensors[name]=(x,[])
+
         layer_num=2
 
         input_channel = self.input_channel
@@ -72,11 +77,14 @@ class MNv2:
             output_channel = int(c * self.width_mult)
             for i in range(n):
                 name = f"IR{layer_num}_{gid}_{i}"
-                x = inverted_residual(name, x, input_channel, output_channel, s if i==0 else 1, 
-                       expand_ratio=t, use_batch_norm=self.use_batch_norm)
+                x, inner_tensors = inverted_residual(name, x, input_channel, output_channel, s if i==0 else 1, 
+                       expand_ratio=t, use_batch_norm=self.use_batch_norm, return_layers = True)
+                layers_tensors[name]=(x,inner_tensors)
                 input_channel = output_channel
                 layer_num+=1
 
-        x = conv_1x1_bn("last", x, self.last_channel, use_batch_norm=self.use_batch_norm)
+        name = "last"
+        x = conv_1x1_bn(name, x, self.last_channel, use_batch_norm=self.use_batch_norm)
+        layers_tensors[name]=(x,[])
 
-        return x
+        return x, layers_tensors
