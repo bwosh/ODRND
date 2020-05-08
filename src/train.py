@@ -20,14 +20,14 @@ val_dataset = CocoDataset(opts.val_ds_name, opts.val_ds_path, coco_supercategori
 
 # Model
 log("Creating model", title=True)
-model, train = get_model(opts)
+model, train, loss = get_model(opts)
 if opts.summary:
     model.summary()
 
 # Training
 log("Training", title=True)
 if opts.epochs>0:
-    train(model, opts, dataset, val_dataset)
+    train(model, opts, loss, dataset, val_dataset)
 
 # FLOPS check
 if opts.flops:

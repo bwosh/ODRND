@@ -84,7 +84,7 @@ def generate_ssd_priors(specs: List[SSDSpec], image_size, clamp=True) -> np.ndar
                     h * ratio
                 ])
 
-    priors = np.array(priors)
+    priors = np.array(priors, dtype=np.float32)
     if clamp:
         priors = np.clip(priors, 0.0, 1.0)
     return priors

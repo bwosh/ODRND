@@ -1,0 +1,2 @@
+class MultiboxLoss():
+    pass
