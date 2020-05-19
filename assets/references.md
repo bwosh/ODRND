@@ -13,6 +13,7 @@ The code may be using some concepts described in:
 
 **Bounding box generation:**
 - [Objects as Points](https://arxiv.org/pdf/1904.07850.pdf) [Apr 2019]
+- [Feature Pyramid Networks for Object Detection](https://arxiv.org/pdf/1612.03144.pdf) [Dec 2016]
 - [SSD: Single Shot MultiBox Detector](https://arxiv.org/pdf/1512.02325.pdf) [Dec 2016]
 
 **Low performace devices optimizations:**
