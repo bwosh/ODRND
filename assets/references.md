@@ -10,6 +10,7 @@ The code may be using some concepts described in:
 - [YOLOv4: Optimal Speed and Accuracy of Object Detection](https://arxiv.org/pdf/2004.10934.pdf) [Apr 2020]
 - [DetNAS: Backbone Search for Object Detection](https://arxiv.org/pdf/1903.10979.pdf) [Mar 2019]
 - [Depthwise Convolution is All You Need for Learning Multiple Visual Domains](https://arxiv.org/pdf/1902.00927.pdf) [Feb 2019]
+- [ResNeSt: Split-Attention Networks](https://arxiv.org/pdf/2004.08955v1.pdf) [April 2020] 
 
 **Bounding box generation:**
 - [Objects as Points](https://arxiv.org/pdf/1904.07850.pdf) [Apr 2019]
@@ -23,6 +24,7 @@ The code may be using some concepts described in:
 - [ThunderNet: Towards Real-time Generic Object Detection](https://arxiv.org/pdf/1903.11752.pdf) [Mar 2019]
 - [An Energy and GPU-Computation Efficient Backbone Network for Real-Time Object Detection](https://arxiv.org/pdf/1904.09730v1.pdf) [Apr 2019]
 - [Fast and Accurate Convolutional Object Detectors for Real-time Embedded Platforms](https://arxiv.org/pdf/1909.10798.pdf) [Sep 2019]
+- [CLBlast: A Tuned OpenCL BLAS Library](https://arxiv.org/pdf/1705.05249.pdf) [May 2017]
 
 **High efficiency approaches:**
 - [FASTERSEG: SEARCHING FOR FASTER REAL-TIME SEMANTIC SEGMENTATION](https://arxiv.org/pdf/1912.10917.pdf) [Dec 2019]
