@@ -11,6 +11,9 @@ The code may be using some concepts described in:
 - [DetNAS: Backbone Search for Object Detection](https://arxiv.org/pdf/1903.10979.pdf) [Mar 2019]
 - [Depthwise Convolution is All You Need for Learning Multiple Visual Domains](https://arxiv.org/pdf/1902.00927.pdf) [Feb 2019]
 - [ResNeSt: Split-Attention Networks](https://arxiv.org/pdf/2004.08955v1.pdf) [April 2020] 
+- [Big Transfer (BiT):
+General Visual Representation Learning](https://arxiv.org/pdf/1912.11370v3.pdf) [Dec 2019]
+- [End-to-End Object Detection with Transformers](https://arxiv.org/pdf/2005.12872v2.pdf) [May 2020]
 
 **Bounding box generation:**
 - [Objects as Points](https://arxiv.org/pdf/1904.07850.pdf) [Apr 2019]
