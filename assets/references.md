@@ -14,6 +14,8 @@ The code may be using some concepts described in:
 - [Big Transfer (BiT):
 General Visual Representation Learning](https://arxiv.org/pdf/1912.11370v3.pdf) [Dec 2019]
 - [End-to-End Object Detection with Transformers](https://arxiv.org/pdf/2005.12872v2.pdf) [May 2020]
+- [POLY-YOLO: HIGHER SPEED, MORE PRECISE DETECTION AND
+INSTANCE SEGMENTATION FOR YOLOV3](https://arxiv.org/pdf/2005.13243.pdf) [Jun 2020]
 
 **Bounding box generation:**
 - [Objects as Points](https://arxiv.org/pdf/1904.07850.pdf) [Apr 2019]
