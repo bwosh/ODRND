@@ -27,7 +27,7 @@ INSTANCE SEGMENTATION FOR YOLOV3](https://arxiv.org/pdf/2005.13243.pdf) [May 202
 
 **Low performace devices optimizations:**
 - [FaceBoxes: A CPU Real-time Face Detector with High Accuracy](https://arxiv.org/pdf/1708.05234.pdf) [Aug 2017]
-- [Real-Time Multi-Scale Face Detector on Embedded Devices](https://www.researchgate.net/publication/332998926_Real-Time_Multi-Scale_Face_Detector_on_Embedded_Devices) [Mar 2019]
+- [Real-Time Multi-Scale Face Detector on Embedded Devices](https://www.researchgate.it adnet/publication/332998926_Real-Time_Multi-Scale_Face_Detector_on_Embedded_Devices) [Mar 2019]
 - [CenterMask : Real-Time Anchor-Free Instance Segmentation](https://arxiv.org/pdf/1911.06667.pdf) [Nov 2019]
 - [ThunderNet: Towards Real-time Generic Object Detection](https://arxiv.org/pdf/1903.11752.pdf) [Mar 2019]
 - [An Energy and GPU-Computation Efficient Backbone Network for Real-Time Object Detection](https://arxiv.org/pdf/1904.09730v1.pdf) [Apr 2019]
@@ -49,6 +49,9 @@ INSTANCE SEGMENTATION FOR YOLOV3](https://arxiv.org/pdf/2005.13243.pdf) [May 202
 augmentations](https://arxiv.org/pdf/1809.06839.pdf) [Sep 2018]
 - [AUGMIX: A SIMPLE DATA PROCESSING METHOD TO
 IMPROVE ROBUSTNESS AND UNCERTAINTY](https://arxiv.org/pdf/1912.02781.pdf) [Dec 2019]
+- [mixup: BEYOND EMPIRICAL RISK MINIMIZATION](https://arxiv.org/pdf/1710.09412.pdf) [Oct 2017]
+- [Self-Adaptive Training: beyond Empirical Risk Minimization](https://arxiv.org/pdf/2002.10319.pdf) [Feb 2020]
+- [Rethinking Pre-training and Self-training](https://arxiv.org/pdf/2006.06882v1.pdf) [Jun 2020]
 
 **Device information:**
 - [AI Benchmark: All About Deep Learning on Smartphones in 2019](https://arxiv.org/pdf/1910.06663.pdf) [Oct 2019]
