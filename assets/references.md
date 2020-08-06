@@ -19,6 +19,7 @@ INSTANCE SEGMENTATION FOR YOLOV3](https://arxiv.org/pdf/2005.13243.pdf) [May 202
 - [PP-YOLO: An Effective and Efficient Implementation of Object Detector](https://arxiv.org/pdf/2007.12099v2.pdf) [Jul 2020]
 - [Fixing the train-test resolution discrepancy](https://arxiv.org/pdf/1906.06423.pdf) [Jun 2019]
 - [Fixing the train-test resolution discrepancy: FixEfficientNet](https://arxiv.org/pdf/2003.08237v4.pdf) [Mar 2020]
+- [ECA-Net: Efficient Channel Attention for Deep Convolutional Neural Networks](https://arxiv.org/pdf/1910.03151v4.pdf) [Apr 2020]
 
 **Bounding box generation:**
 - [Objects as Points](https://arxiv.org/pdf/1904.07850.pdf) [Apr 2019]
