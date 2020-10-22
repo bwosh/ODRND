@@ -20,7 +20,8 @@ INSTANCE SEGMENTATION FOR YOLOV3](https://arxiv.org/pdf/2005.13243.pdf) [May 202
 - [Fixing the train-test resolution discrepancy](https://arxiv.org/pdf/1906.06423.pdf) [Jun 2019]
 - [Fixing the train-test resolution discrepancy: FixEfficientNet](https://arxiv.org/pdf/2003.08237v4.pdf) [Mar 2020]
 - [ECA-Net: Efficient Channel Attention for Deep Convolutional Neural Networks](https://arxiv.org/pdf/1910.03151v4.pdf) [Apr 2020]
-- [Feature Pyramid Transformer] (https://arxiv.org/pdf/2007.09451v1.pdf) (Jul 2020)
+- [Feature Pyramid Transformer](https://arxiv.org/pdf/2007.09451v1.pdf) [Jul 2020]
+- [LAMBDANETWORKS: MODELING LONG-RANGE INTERACTIONS WITHOUT ATTENTION](https://openreview.net/pdf?id=xTJEN-ggl1b) [Oct 2020]
 
 **Bounding box generation:**
 - [Objects as Points](https://arxiv.org/pdf/1904.07850.pdf) [Apr 2019]
@@ -29,7 +30,7 @@ INSTANCE SEGMENTATION FOR YOLOV3](https://arxiv.org/pdf/2005.13243.pdf) [May 202
 
 **Low performace devices optimizations:**
 - [FaceBoxes: A CPU Real-time Face Detector with High Accuracy](https://arxiv.org/pdf/1708.05234.pdf) [Aug 2017]
-- [Real-Time Multi-Scale Face Detector on Embedded Devices](https://www.researchgate.it adnet/publication/332998926_Real-Time_Multi-Scale_Face_Detector_on_Embedded_Devices) [Mar 2019]
+- [Real-Time Multi-Scale Face Detector on Embedded Devices](https://www.researchgate.net/publication/332998926_Real-Time_Multi-Scale_Face_Detector_on_Embedded_Devices/fulltext/5cd5879b299bf14d95893447/Real-Time-Multi-Scale-Face-Detector-on-Embedded-Devices.pdf) [Mar 2019]
 - [CenterMask : Real-Time Anchor-Free Instance Segmentation](https://arxiv.org/pdf/1911.06667.pdf) [Nov 2019]
 - [ThunderNet: Towards Real-time Generic Object Detection](https://arxiv.org/pdf/1903.11752.pdf) [Mar 2019]
 - [An Energy and GPU-Computation Efficient Backbone Network for Real-Time Object Detection](https://arxiv.org/pdf/1904.09730v1.pdf) [Apr 2019]
