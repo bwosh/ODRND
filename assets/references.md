@@ -37,6 +37,10 @@ INSTANCE SEGMENTATION FOR YOLOV3](https://arxiv.org/pdf/2005.13243.pdf) [May 202
 - [Fast and Accurate Convolutional Object Detectors for Real-time Embedded Platforms](https://arxiv.org/pdf/1909.10798.pdf) [Sep 2019]
 - [CLBlast: A Tuned OpenCL BLAS Library](https://arxiv.org/pdf/1705.05249.pdf) [May 2017]
 
+**Optimizations:**
+- [AdaBelief Optimizer: Adapting Stepsizes by the
+Belief in Observed Gradients](https://arxiv.org/pdf/2010.07468v1.pdf) [Oct 2020]
+
 **High efficiency approaches:**
 - [FASTERSEG: SEARCHING FOR FASTER REAL-TIME SEMANTIC SEGMENTATION](https://arxiv.org/pdf/1912.10917.pdf) [Dec 2019]
 
