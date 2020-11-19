@@ -22,6 +22,7 @@ INSTANCE SEGMENTATION FOR YOLOV3](https://arxiv.org/pdf/2005.13243.pdf) [May 202
 - [ECA-Net: Efficient Channel Attention for Deep Convolutional Neural Networks](https://arxiv.org/pdf/1910.03151v4.pdf) [Apr 2020]
 - [Feature Pyramid Transformer](https://arxiv.org/pdf/2007.09451v1.pdf) [Jul 2020]
 - [LAMBDANETWORKS: MODELING LONG-RANGE INTERACTIONS WITHOUT ATTENTION](https://openreview.net/pdf?id=xTJEN-ggl1b) [Oct 2020]
+- [Scaled-YOLOv4: Scaling Cross Stage Partial Network](https://arxiv.org/pdf/2011.08036v1.pdf) [Nov 2020]
 
 **Bounding box generation:**
 - [Objects as Points](https://arxiv.org/pdf/1904.07850.pdf) [Apr 2019]
